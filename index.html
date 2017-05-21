@@ -1,0 +1,55 @@
+<html>
+<header>
+    <title>Vue JS</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</header>
+
+<body class="container" v-cloak>
+    <div id="card">
+        <div class="page-header">
+            <h1>{{title}}</h1>
+            <div v-html="content"></div>
+        </div>
+        <br>
+        <!--<input type="text" v-model="inputText" id="itemForm" />-->
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="itemForm" v-on:keypress.enter="addItem" />
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary" v-on:click="addItem">Add Car</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10">
+                <ul class="list-group">
+                    <li class="list-group-item" v-for="(car, index) in cars">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <button class="btn btn-danger" v-on:click="removeItem(index)">X</button>
+                            </div>
+                            <div class="col-md-8">
+                                <div>{{car.name | capitalize}}</div>
+                                <div>The {{car.name | undercase}} can speed upto {{car.speed}} Km/h</div>
+                                <div>
+                                    <a href="" target="_blank">{{car.name | getWikiUrl | undercase}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://unpkg.com/vue@2.3.3"></script>
+<script src="app.js"></script>
+
+</html>
