@@ -6,6 +6,7 @@
             title: 'Cars available in stock',
             content: 'Cars are human friends. <strong>Loved by people</strong> a lot than other mode of transport',
             inputText: '',
+            buttonText: 'Add car',
             cars: [
                 { name: 'Bugati', speed: 387, count: 4 },
                 { name: 'Lambogini', speed: 290, count: 7 },
@@ -75,7 +76,11 @@
             }
         },
         watch: {
-
+            // below is the data model which should be watched on change
+            inputText: _.debounce(function(){
+                // used split to show only text before ",". Because the text after "," is the speed of car.
+                this.buttonText = this.inputText !== "" ? "Add " + this.inputText.split(",")[0] : "Add car";
+            }, 250)
         },
         computed: {
             buttonDisabled: function () {

@@ -19,7 +19,7 @@
                 />
             </div>
             <div class="col-md-2">
-                <button class="btn btn-primary" v-on:click="addItem" v-bind:disabled="buttonDisabled">Add Car</button>
+                <button class="btn btn-primary" v-on:click="addItem" v-bind:disabled="buttonDisabled">{{buttonText}}</button>
             </div>
         </div>
 
@@ -80,6 +80,7 @@
 </body>
 
 <script src="https://unpkg.com/vue@2.3.3"></script>
+<script src="http://underscorejs.org/underscore.js"></script>
 <script src="app.js"></script>
 
 </html>
