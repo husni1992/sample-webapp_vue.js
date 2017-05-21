@@ -1,5 +1,4 @@
 (function () {
-    document.getElementById('itemForm').focus();
     var card = new Vue({
         el: '#card',
         data: {
