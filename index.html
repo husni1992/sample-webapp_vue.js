@@ -15,11 +15,11 @@
         <!--<input type="text" v-model="inputText" id="itemForm" />-->
         <div class="row" style="margin-bottom: 20px;">
             <div class="col-md-6">
-                <input type="text" class="form-control" id="itemForm" placeholder="Enter car name, speed of the car in km/h" v-on:keypress.enter="addItem"
+                <input type="text" v-model="inputText" class="form-control" id="itemForm" placeholder="Enter car name, speed of the car in km/h" v-on:keypress.enter="addItem"
                 />
             </div>
             <div class="col-md-2">
-                <button class="btn btn-primary" v-on:click="addItem">Add Car</button>
+                <button class="btn btn-primary" v-on:click="addItem" v-bind:disabled="buttonDisabled">Add Car</button>
             </div>
         </div>
 
@@ -38,12 +38,12 @@
                                     <a href="" target="_blank">{{car.name | getWikiUrl | undercase}}</a>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-md-7">
                                         In stock count: {{car.count}}
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-5">
                                         <span style="margin-left: 10px">
                                             <button class="btn btn-success" v-on:click="car.count++">+</button>
                                             <button class="btn btn-danger" v-on:click="car.count > 0 && car.count--">-</button>
@@ -54,10 +54,24 @@
                         </div>
                     </li>
                 </ul>
-                <div class="row">
+                <div class="row" style="margin-left: 1px;">
                     <div class="col-md-5">
-                        <div class="list-item" data-toggle="tooltip" data-placement="left" title="Cars with speed over 450 km/h">Total sports cars in stock: {{sportsCarsCount}}</div>
-                        <div class="list-item">Total cars in stock: {{stockCount}}</div>
+                        <div class="row list-item" data-toggle="tooltip" data-placement="left" title="Cars with speed over 450 km/h">
+                            <div class="col-md-8">
+                                Total sports cars in stock: {{sportsCarsCount}}
+                            </div>
+                            <div class="col-md-4">
+                                <span style="color: brown">Updated: {{sportsCarCountUpdated}}</span>
+                            </div>
+                        </div>  
+                        <div class="row list-item" data-toggle="tooltip" data-placement="left" title="Cars with speed over 450 km/h">
+                            <div class="col-md-8">
+                                Total cars in stock: {{stockCount}}
+                            </div>
+                            <div class="col-md-4">
+                                <span style="color: brown">Updated: {{stockUpdated}}</span>
+                            </div>
+                        </div>                            
                     </div>
                 </div>
             </div>
