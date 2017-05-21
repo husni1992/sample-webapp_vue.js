@@ -3,13 +3,13 @@
     var card = new Vue({
         el: '#card',
         data: {
-            title: 'Cars',
+            title: 'Cars available in stock',
             content: 'Cars are human friends. <strong>Loved by people</strong> a lot than other mode of transport',
             cars: [
-                { name: 'Bugati', speed: 320 },
-                { name: 'Lambogini', speed: 290 },
-                { name: 'Ferari', speed: 297 },
-                { name: 'Volks Wagon', speed: 285 }
+                { name: 'Bugati', speed: 320, count: 4 },
+                { name: 'Lambogini', speed: 290, count: 7 },
+                { name: 'Ferari', speed: 297, count: 12 },
+                { name: 'Volks Wagon', speed: 285, count: 2 }
             ],
             inputText: ''
         },
@@ -44,6 +44,18 @@
             },
             removeItem: function (index) {
                 this.cars.splice(index, 1);
+            }
+        },
+        computed: {
+            stockCount: function(){
+                var total = 0;
+                var items = this.cars;
+
+                items.forEach(function(item) {
+                    total += item.count && item.count || 0;
+                }, this);
+
+                return total;
             }
         }
     })
