@@ -7,6 +7,7 @@
             content: 'Cars are human friends. <strong>Loved by people</strong> a lot than other mode of transport',
             inputText: '',
             buttonText: 'Add car',
+            amount: null,
             cars: [
                 { name: 'Bugati', speed: 387, count: 4 },
                 { name: 'Lambogini', speed: 290, count: 7 },
@@ -66,7 +67,7 @@
                     this.cars.push({
                         name: name,
                         speed: speed,
-                        count: 0
+                        count: !this.amount ? 1 : Number(this.amount)
                     })
                     this.inputText = "";
                 }

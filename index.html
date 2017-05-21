@@ -15,67 +15,73 @@
         <!--<input type="text" v-model="inputText" id="itemForm" />-->
         <div class="row" style="margin-bottom: 20px;">
             <div class="col-md-6">
-                <input type="text" v-model="inputText" class="form-control" id="itemForm" placeholder="Enter car name, speed of the car in km/h" v-on:keypress.enter="addItem"
-                />
+                <input type="text" v-model="inputText" class="form-control" id="itemForm" placeholder="Enter car name, speed of the car in km/h"
+                    v-on:keypress.enter="addItem" />
+            </div>
+            <div class="col-md-2">
+                <input type="number" class="form-control" v-model="amount" />
             </div>
             <div class="col-md-2">
                 <button class="btn btn-primary" v-on:click="addItem" v-bind:disabled="buttonDisabled">{{buttonText}}</button>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-10">
-                <ul class="list-group">
-                    <li class="list-group-item" v-for="(car, index) in cars">
-                        <div class="row">
-                            <div class="col-md-1">
-                                <button class="btn btn-danger" v-on:click="removeItem(index)">X</button>
-                            </div>
-                            <div class="col-md-6">
-                                <div>{{car.name | capitalize}}</div>
-                                <div>The {{car.name | undercase}} can speed upto {{car.speed}} Km/h</div>
-                                <div>
-                                    <a href="" target="_blank">{{car.name | getWikiUrl | undercase}}</a>
+        <template v-if="this.cars.length > 0">
+            <div class="row">
+                <div class="col-md-10">
+                    <ul class="list-group">
+                        <li class="list-group-item" v-for="(car, index) in cars">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <button class="btn btn-danger" v-on:click="removeItem(index)">X</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <div>{{car.name | capitalize}}</div>
+                                    <div>The {{car.name | undercase}} can speed upto {{car.speed}} Km/h</div>
+                                    <div>
+                                        <a href="" target="_blank">{{car.name | getWikiUrl | undercase}}</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            In stock count: {{car.count}}
+                                        </div>
+                                        <div class="col-md-5">
+                                            <span style="margin-left: 10px">
+                                            <button class="btn btn-success" v-on:click="car.count++">+</button>
+                                            <button v-show="car.count > 1" class="btn btn-danger" v-on:click="car.count > 0 && car.count--">-</button>
+                                        </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        In stock count: {{car.count}}
-                                    </div>
-                                    <div class="col-md-5">
-                                        <span style="margin-left: 10px">
-                                            <button class="btn btn-success" v-on:click="car.count++">+</button>
-                                            <button class="btn btn-danger" v-on:click="car.count > 0 && car.count--">-</button>
-                                        </span>
-                                    </div>
+                        </li>
+                    </ul>
+                    <div class="row" style="margin-left: 1px;">
+                        <div class="col-md-5">
+                            <div class="row list-item" data-toggle="tooltip" data-placement="left" title="Cars with speed over 450 km/h">
+                                <div class="col-md-8">
+                                    Total sports cars in stock: {{sportsCarsCount}}
+                                </div>
+                                <div class="col-md-4">
+                                    <span style="color: brown">Updated: {{sportsCarCountUpdated}}</span>
+                                </div>
+                            </div>
+                            <div class="row list-item" data-toggle="tooltip" data-placement="left" title="Cars with speed over 450 km/h">
+                                <div class="col-md-8">
+                                    Total cars in stock: {{stockCount}}
+                                </div>
+                                <div class="col-md-4">
+                                    <span style="color: brown">Updated: {{stockUpdated}}</span>
                                 </div>
                             </div>
                         </div>
-                    </li>
-                </ul>
-                <div class="row" style="margin-left: 1px;">
-                    <div class="col-md-5">
-                        <div class="row list-item" data-toggle="tooltip" data-placement="left" title="Cars with speed over 450 km/h">
-                            <div class="col-md-8">
-                                Total sports cars in stock: {{sportsCarsCount}}
-                            </div>
-                            <div class="col-md-4">
-                                <span style="color: brown">Updated: {{sportsCarCountUpdated}}</span>
-                            </div>
-                        </div>  
-                        <div class="row list-item" data-toggle="tooltip" data-placement="left" title="Cars with speed over 450 km/h">
-                            <div class="col-md-8">
-                                Total cars in stock: {{stockCount}}
-                            </div>
-                            <div class="col-md-4">
-                                <span style="color: brown">Updated: {{stockUpdated}}</span>
-                            </div>
-                        </div>                            
                     </div>
                 </div>
             </div>
-        </div>
+        </template>
+        <p v-else>You have no cars in the stock</p>
     </div>
 </body>
 
